@@ -1,11 +1,11 @@
 #![no_std]
 #![no_main]
 #![feature(custom_test_frameworks)]
-#![test_runner(os::test_runner)]
+#![test_runner(bedrock::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
+use bedrock::println;
 use core::panic::PanicInfo;
-use os::println;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
@@ -28,7 +28,7 @@ fn panic(info: &PanicInfo) -> ! {
 #[cfg(test)]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    os::test_panic_handler(info)
+    bedrock::test_panic_handler(info)
 }
 
 #[test_case]
